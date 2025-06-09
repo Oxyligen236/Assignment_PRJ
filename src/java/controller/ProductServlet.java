@@ -4,7 +4,10 @@
  */
 package controller;
 
+import dal.BrandDAO;
 import dal.ProductDAO;
+import dal.ProductImageDAO;
+import dal.TypeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import model.Brand;
 import model.Product;
+import model.Type;
 
 /**
  *
@@ -61,27 +66,48 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO pd = new ProductDAO();
-        List<Product> productList = new ArrayList<>();
+        String brandId_Raw = request.getParameter("brandId");
+        String typeId_Raw = request.getParameter("typeId");
 
-        String brandIdRaw = request.getParameter("brandId");
-        String typeIdRaw = request.getParameter("typeId");
+        try {
+            List<Product> productList = new ArrayList<>();
+            
+            ProductDAO pd = new ProductDAO();
+            ProductImageDAO pid = new ProductImageDAO();
+            BrandDAO bd = new BrandDAO();
+            TypeDAO td = new TypeDAO();
+            
+            if (brandId_Raw != null) {
+                int brandId = Integer.parseInt(brandId_Raw);
+                productList = pd.getProductbyBrandId(brandId);
+            } else if (typeId_Raw != null) {
+                int typeId = Integer.parseInt(typeId_Raw);
+                productList = pd.getProductbyTypeId(typeId);
+            } else {
+                productList = pd.getAll();
+            }
 
-        if (brandIdRaw != null) {
-            int brandId = Integer.parseInt(brandIdRaw);
-            productList = pd.getProductbyBrandId(brandId);
-        } else if (typeIdRaw != null) {
-            int typeId = Integer.parseInt(typeIdRaw);
-            productList = pd.getProductbyTypeId(typeId);
-        } else {
-            productList = pd.getAll();
+           
+            List<List<String>> imageLists = new ArrayList<>();
+            for (Product p : productList) {
+                List<String> imgs = pid.getImagesByProductId(p.getProductId());
+                imageLists.add(imgs);
+            }
+
+            List<Brand> brandList = bd.getAll();
+            List<Type> typeList = td.getAll();
+
+            request.setAttribute("productList", productList);
+            request.setAttribute("numP", productList.size());
+            request.setAttribute("imageLists", imageLists);
+            request.setAttribute("brandList", brandList);
+            request.setAttribute("typeList", typeList);
+
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
-
-        
-        request.setAttribute("productList", productList);
-        request.setAttribute("numP", productList.size());
-
-        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
     /**
