@@ -5,28 +5,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Brand;
 import model.Product;
+import model.Type;
 
 public class ProductDAO extends DBContext {
 
-//      private int productId;
+//   private int productId;
 //    private String productName;
 //    private int productQuantity;
 //    private String description;
-//    private double money;
-//    private int typeId;
-//    private int brandId;
+//    private double price;
+//    private Type type;
+//    private Brand brand;
 //    private String createdAt;
-//    private String updatedAt;       
+//    private String updatedAt;      
     public List<Product> getAll() {
         List<Product> productList = new ArrayList<>();
         String sql = "select * from Product";
+        TypeDAO td = new TypeDAO();
+        BrandDAO bd = new BrandDAO();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getInt("productId"), rs.getString("productName"),
-                        rs.getInt("productQuantity"), rs.getString("description"), rs.getDouble("price"), rs.getInt("typeId"), rs.getInt("brandId"), rs.getString("createdAt"), rs.getString("updatedAt"));
+                Product p = new Product();
+                p.setProductId(rs.getInt("productId"));
+                p.setProductName(rs.getString("productName"));
+                p.setProductQuantity(rs.getInt("productQuantity"));
+                p.setDescription(rs.getString("description"));
+                p.setPrice(rs.getDouble("price"));
+                Type e = td.getTypeById(rs.getInt("TypeID"));
+                p.setType(e);
+                Brand b = bd.getBrandById(rs.getInt("BrandID"));
+                p.setBrand(b);
+                p.setCreatedAt(rs.getString("createdAt"));
+                p.setUpdatedAt(rs.getString("updatedAt"));
                 productList.add(p);
             }
         } catch (SQLException e) {
@@ -49,13 +63,27 @@ public class ProductDAO extends DBContext {
 
     public Product getProductById(int id) {
         String sql = "Select * from Product where id=?";
+        TypeDAO td = new TypeDAO();
+        BrandDAO bd = new BrandDAO();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
+            
             if (rs.next()) {
-                return new Product(id, rs.getString("productName"),
-                        rs.getInt("productQuantity"), rs.getString("description"), rs.getDouble("price"), rs.getInt("typeId"), rs.getInt("brandId"), rs.getString("createdAt"), rs.getString("updatedAt"));
+                Product p = new Product();
+                p.setProductId(rs.getInt("productId"));
+                p.setProductName(rs.getString("productName"));
+                p.setProductQuantity(rs.getInt("productQuantity"));
+                p.setDescription(rs.getString("description"));
+                p.setPrice(rs.getDouble("price"));
+                Type e = td.getTypeById(rs.getInt("TypeID"));
+                p.setType(e);
+                Brand b = bd.getBrandById(rs.getInt("BrandID"));
+                p.setBrand(b);
+                p.setCreatedAt(rs.getString("createdAt"));
+                p.setUpdatedAt(rs.getString("updatedAt"));
+                return p;
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -66,14 +94,16 @@ public class ProductDAO extends DBContext {
     //update
     public void update(Product p) {
         String sql = "update Product set productName=?, productQuantity=?, description=?, price=?, typeId=?, brandId=?, createdAt=? updatedAt=? where productId=?";
+        TypeDAO td = new TypeDAO();
+        BrandDAO bd = new BrandDAO();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, p.getProductName());
             st.setInt(2, p.getProductQuantity());
             st.setString(3, p.getDescription());
             st.setDouble(4, p.getPrice());
-            st.setInt(5, p.getTypeId());
-            st.setInt(6, p.getBrandId());
+            st.setInt(5, p.getType().getTypeID());
+            st.setInt(6, p.getBrand().getBrandId());
             st.setString(7, p.getCreatedAt());
             st.setString(8, p.getUpdatedAt());
             st.setInt(9, p.getProductId());
@@ -82,6 +112,102 @@ public class ProductDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public List<Product> getProductbyBrandId(int brandId) {
+        String sql = "SELECT [ProductID]\n"
+                + "      ,[ProductName]\n"
+                + "      ,[ProductQuantity]\n"
+                + "      ,[Description]\n"
+                + "      ,[Price]\n"
+                + "      ,[TypeID]\n"
+                + "      ,[BrandID]\n"
+                + "      ,[CreatedAt]\n"
+                + "      ,[UpdatedAt]\n"
+                + "  FROM [dbo].[Product]\n"
+                + "  where 1=1";
+        
+        TypeDAO td = new TypeDAO();
+        BrandDAO bd = new BrandDAO();
+        if (brandId != 0) {
+            sql += " and BrandID=?";
+        }
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            if (brandId != 0) {
+                st.setInt(1, brandId);
+            }
+
+            ResultSet rs = st.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while (rs.next()) {
+                 Product p = new Product();
+                p.setProductId(rs.getInt("productId"));
+                p.setProductName(rs.getString("productName"));
+                p.setProductQuantity(rs.getInt("productQuantity"));
+                p.setDescription(rs.getString("description"));
+                p.setPrice(rs.getDouble("price"));
+                Type e = td.getTypeById(rs.getInt("TypeID"));
+                p.setType(e);
+                Brand b = bd.getBrandById(rs.getInt("BrandID"));
+                p.setBrand(b);
+                p.setCreatedAt(rs.getString("createdAt"));
+                p.setUpdatedAt(rs.getString("updatedAt"));
+                list.add(p);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public List<Product> getProductbyTypeId(int typeId) {
+        String sql = "SELECT [ProductID]\n"
+                + "      ,[ProductName]\n"
+                + "      ,[ProductQuantity]\n"
+                + "      ,[Description]\n"
+                + "      ,[Price]\n"
+                + "      ,[TypeID]\n"
+                + "      ,[BrandID]\n"
+                + "      ,[CreatedAt]\n"
+                + "      ,[UpdatedAt]\n"
+                + "  FROM [dbo].[Product]\n"
+                + "  where 1=1";
+        
+        TypeDAO td = new TypeDAO();
+        BrandDAO bd = new BrandDAO();
+        if (typeId != 0) {
+            sql += " and TypeID=?";
+        }
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            if (typeId != 0) {
+                st.setInt(1, typeId);
+            }
+
+            ResultSet rs = st.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while (rs.next()) {
+                 Product p = new Product();
+                p.setProductId(rs.getInt("productId"));
+                p.setProductName(rs.getString("productName"));
+                p.setProductQuantity(rs.getInt("productQuantity"));
+                p.setDescription(rs.getString("description"));
+                p.setPrice(rs.getDouble("price"));
+                Type e = td.getTypeById(rs.getInt("TypeID"));
+                p.setType(e);
+                Brand b = bd.getBrandById(rs.getInt("BrandID"));
+                p.setBrand(b);
+                p.setCreatedAt(rs.getString("createdAt"));
+                p.setUpdatedAt(rs.getString("updatedAt"));
+                list.add(p);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
     //insert
@@ -108,12 +234,12 @@ public class ProductDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, p.getProductName());
             st.setInt(2, p.getProductQuantity());
-            st.setString(3,p.getDescription() );
+            st.setString(3, p.getDescription());
             st.setDouble(3, p.getPrice());
-            st.setInt(3,p.getTypeId() );
-            st.setInt(3, p.getBrandId());
-            st.setString(3,p.getCreatedAt() );
-            st.setString(3,p.getUpdatedAt());
+            st.setInt(3, p.getType().getTypeID());
+            st.setInt(3, p.getBrand().getBrandId());
+            st.setString(3, p.getCreatedAt());
+            st.setString(3, p.getUpdatedAt());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

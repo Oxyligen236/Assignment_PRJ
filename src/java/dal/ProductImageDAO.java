@@ -10,6 +10,21 @@ import model.ProductImage;
 
 
 public class ProductImageDAO extends DBContext{
+    public List<ProductImage> getAll(){
+        List<ProductImage> list = new ArrayList<>();
+        String sql=" Select * from ProductImage";
+        try {
+             PreparedStatement st = connection.prepareStatement(sql);
+              ResultSet rs = st.executeQuery();
+               while(rs.next()){
+                   ProductImage p = new ProductImage(rs.getInt("imageId"), rs.getString("url"), rs.getInt("productId"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
     public List<String> getImagesByProductId(int productId){
         List<String> list = new ArrayList<>();
         String sql="Select * from ProductImage where ProductID = ?";

@@ -1,31 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 
 public class Type {
 //    TypeID INT IDENTITY(1,1) PRIMARY KEY,
 //  TypeName VARCHAR(50) NOT NULL
-    private int typeId;
+    private int typeID;
     private String typeName;
 
     public Type() {
     }
 
-    public Type(int typeId, String typeName) {
-        this.typeId = typeId;
+    public Type(int typeID, String typeName) {
+        this.typeID = typeID;
         this.typeName = typeName;
     }
-    //
 
-    public int getTypeId() {
-        return typeId;
+    public int getTypeID() {
+        return typeID;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
     }
 
     public String getTypeName() {
@@ -35,6 +31,7 @@ public class Type {
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
-    
+
+   
     
 }
