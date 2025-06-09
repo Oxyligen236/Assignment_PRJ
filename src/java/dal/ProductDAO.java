@@ -235,11 +235,11 @@ public class ProductDAO extends DBContext {
             st.setString(1, p.getProductName());
             st.setInt(2, p.getProductQuantity());
             st.setString(3, p.getDescription());
-            st.setDouble(3, p.getPrice());
-            st.setInt(3, p.getType().getTypeID());
-            st.setInt(3, p.getBrand().getBrandId());
-            st.setString(3, p.getCreatedAt());
-            st.setString(3, p.getUpdatedAt());
+            st.setDouble(4, p.getPrice());
+            st.setInt(5, p.getType().getTypeID());
+            st.setInt(6, p.getBrand().getBrandId());
+            st.setString(7, p.getCreatedAt());
+            st.setString(8, p.getUpdatedAt());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
