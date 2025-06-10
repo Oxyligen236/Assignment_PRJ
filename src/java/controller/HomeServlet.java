@@ -67,6 +67,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         ProductDAO pd = new ProductDAO();
         ProductImageDAO pid = new ProductImageDAO();
         BrandDAO bd = new BrandDAO();
@@ -81,6 +82,7 @@ public class HomeServlet extends HttpServlet {
 
         List<Brand> brandList = bd.getAll();
         List<Type> typeList = td.getAll();
+        
 
         request.setAttribute("productList", productList);
         request.setAttribute("imageLists", imageLists); 

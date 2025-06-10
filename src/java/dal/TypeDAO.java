@@ -51,6 +51,9 @@ public class TypeDAO extends DBContext{
     public static void main(String[] args) {
         TypeDAO t = new TypeDAO();
         List<Type> list = t.getAll();
-        System.out.println(list.get(0).getTypeID());
+        for (Type ty : list) {
+            System.out.println(ty.getTypeName());
+        }
+        
     }
 }
