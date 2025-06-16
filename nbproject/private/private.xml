@@ -5,11 +5,13 @@
         <group>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/model/Type.java</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/controller/ProductServlet.java</file>
+            <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/web/detail.jsp</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/controller/ProductImageServlet.java</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/dal/ProductImageDAO.java</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/model/Brand.java</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/controller/HomeServlet.java</file>
-            <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/controller/BrandServlet.java</file>
+            <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/model/ProductImage.java</file>
+            <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/controller/DetailServlet.java</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/web/home.jsp</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/controller/TypeServlet.java</file>
             <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Asignment_Nhom3/src/java/dal/BrandDAO.java</file>

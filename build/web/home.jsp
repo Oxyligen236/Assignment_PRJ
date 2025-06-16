@@ -17,8 +17,8 @@
     <body>
         <!--Header-->
         <jsp:include page="header.jsp"></jsp:include>            
-          
-            
+
+
             <div class="container">
                 <div class="row"> 
                     <!--Type list -->
@@ -43,18 +43,18 @@
 
                                         <fmt:formatNumber value="${pr.price}" type="number" groupingUsed="true"/>
                                     </p>
-                                    <a href="#" class="btn btn-primary">Add To Cart</a>
+                                    <a class="btn btn-primary" href="detail?pid=${pr.productId}">Detail</a>
                                 </div>
                             </div>
                         </c:forEach>
                     </div>
                 </div>
-                
-                
-                </div>
-            </div>
 
-       
+
+            </div>
+        </div>
+
+
 
 
 

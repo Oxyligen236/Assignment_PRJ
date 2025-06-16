@@ -51,7 +51,7 @@ public class ProductDAO extends DBContext {
 
     //delete
     public void remove(int productId) {
-        String sql = "delete from Product where id=?";
+        String sql = "delete from Product where id= ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, productId);
@@ -62,7 +62,7 @@ public class ProductDAO extends DBContext {
     }
 
     public Product getProductById(int id) {
-        String sql = "Select * from Product where id=?";
+        String sql = "Select * from Product where ProductID=?";
         TypeDAO td = new TypeDAO();
         BrandDAO bd = new BrandDAO();
         try {
@@ -248,7 +248,9 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO c = new ProductDAO();
-        List<Product> list = c.getAll();
-        System.out.println(list.get(0).getProductName());
+        Product p=c.getProductById(1);
+        System.out.println(p.getPrice());
+        //List<Product> list = c.getAll();
+        //System.out.println(list.get(0).getProductName());
     }
 }

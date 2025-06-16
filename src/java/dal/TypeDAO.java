@@ -34,7 +34,7 @@ public class TypeDAO extends DBContext{
     }
     
      public Type getTypeById(int id) {
-        String sql = "select * from TypeID = ?";
+        String sql = "select * from type where TypeID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -50,10 +50,12 @@ public class TypeDAO extends DBContext{
 
     public static void main(String[] args) {
         TypeDAO t = new TypeDAO();
-        List<Type> list = t.getAll();
-        for (Type ty : list) {
-            System.out.println(ty.getTypeName());
-        }
+        Type tt=t.getTypeById(1);
+        System.out.println(tt.getTypeID());
+//        List<Type> list = t.getAll();
+//        for (Type ty : list) {
+//            System.out.println(ty.getTypeName());
+//        }
         
     }
 }
