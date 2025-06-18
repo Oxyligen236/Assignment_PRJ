@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
     </head>
     <body>
+        <h1>DIIDIDIDIDIIDIDD</h1>
         <!--Header-->
         <jsp:include page="header.jsp"></jsp:include>            
 
@@ -49,14 +50,7 @@
                         </c:forEach>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
-
-
-
     </body>
 </html>
