@@ -11,19 +11,35 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
     </head>
     <body>
-        <h2>Product Information</h2>
-
+        <div> 
+             <h2>Product Information</h2>
+        </div>
+       
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-4 product-img">
+                
+            </div>
+            <div class="col-4 product-info">
+                <h2>${product.productName}</h2>
+                <hr/>   
+                <h3>Overview</h3> <br/><br/>
+                <p>${product.description}</p>
+            </div>
+            <div class="col-2"></div>
+        </div>
         <c:set var="images" value="${requestScope.images}"/>
          <c:set var="product" value="${requestScope.product}"/>
         <img src="${images[0]}" width="300" height="250"/>
 
       
-        <h3>${product.productName}</h3>
+        
         <p>Price: ${product.price}</p>
         <p>Quantity: ${product.productQuantity}</p>
-        <p>Description: ${product.description}</p>
+        
         
    
         <p>Brand: ${product.brand.brandName}</p> 

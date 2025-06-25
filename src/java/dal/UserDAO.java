@@ -9,11 +9,11 @@ import java.util.List;
 import model.User;
 
 public class UserDAO extends DBContext{
-    public User getByUserID(String userID){
-        String sql="sellect * from User where userID =?";
+    public User getByUserID(int userID){
+        String sql="select * from [User] where userID =?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, userID);
+            st.setInt(1, userID);
             ResultSet rs=st.executeQuery();
             if (rs.next()){
                 User u = new User(rs.getInt("userID"), rs.getInt("roleID"), rs.getString("fullName"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("address"), rs.getString("gender"));

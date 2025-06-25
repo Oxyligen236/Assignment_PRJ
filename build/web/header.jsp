@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     </head>
     <body>
@@ -17,7 +17,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Menu bên trái -->
+
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a href="product?brandId=0" class="nav-link">All</a>
@@ -29,11 +29,12 @@
                     </c:forEach>
                 </ul>
 
-                <!-- Thanh tìm kiếm -->
+
                 <form class="form-inline my-2 my-lg-0 mr-3">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+
 
                 <!-- Login / Logout -->
                 <ul class="navbar-nav ml-auto">
@@ -49,6 +50,9 @@
                         <c:otherwise>
                             <li class="nav-item">
                                 <a class="nav-link" href="login.jsp">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="register.jsp">Register</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
