@@ -14,8 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpServletResponse;import java.util.List;
 import model.Product;
 import model.ProductOption;
 import model.Specifications;
@@ -65,9 +64,10 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String idRaw = request.getParameter("pid");          
-        try{
-            System.out.println("------------------------");
+        String idRaw = request.getParameter("pid");
+        String optionRaw = request.getParameter("optionId");
+
+        try {
             int id = Integer.parseInt(idRaw);
             ProductDAO dao = new ProductDAO();
             ProductImageDAO pid = new ProductImageDAO();
@@ -93,9 +93,9 @@ public class DetailServlet extends HttpServlet {
             }
 
             request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch(ServletException | IOException | NumberFormatException e){
-            System.out.println(e);
-            //response.sendRedirect("home.jsp");
+        } catch (ServletException | IOException | NumberFormatException e) {
+            System.out.println("DetailServlet Error: " + e.getMessage());
+            // response.sendRedirect("error.jsp");
         }
 
     }

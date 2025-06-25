@@ -13,7 +13,7 @@ import model.Specifications;
  *
  * @author Admin
  */
-public class SpecificationsDAO extends DBContext {
+public class SpecificationsDAO extends DBContext{
 
     public Specifications getBySpecID(int id) {
         String sql = "SELECT * FROM Specifications WHERE SpecID = ?";
