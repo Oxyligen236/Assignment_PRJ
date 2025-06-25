@@ -11,9 +11,15 @@
         <div class="container">
             <jsp:include page="header.jsp"></jsp:include>
                 <h2>User Detail</h2>
-                <hr/><!-- comment -->
+                <hr/>
                 <p style="color: blue">                
                 Username: ${sessionScope.account.username}<br/>
+                Fullname: ${sessionScope.user.fullName}<br/>
+                Email: ${sessionScope.user.email}<br/>
+                PhoneNumber:${sessionScope.user.phoneNumber}<br/>
+                Gender:${sessionScope.user.gender}<br/>
+                Address:${sessionScope.user.address}<br/>
+                
             </p>
         </div>
        

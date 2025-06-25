@@ -6,6 +6,8 @@ package controller;
 
 import dal.ProductDAO;
 import dal.ProductImageDAO;
+import dal.ProductOptionDAO;
+import dal.SpecificationsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,9 +15,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import model.Product;
+import model.ProductOption;
+import model.Specifications;
 
 /**
  *
@@ -62,26 +65,39 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String idRaw = request.getParameter("pid");
-          
+         String idRaw = request.getParameter("pid");          
         try{
             System.out.println("------------------------");
             int id = Integer.parseInt(idRaw);
             ProductDAO dao = new ProductDAO();
-            Product product = dao.getProductById(id);
-            System.out.println(product.getPrice());
             ProductImageDAO pid = new ProductImageDAO();
+            ProductOptionDAO pod = new ProductOptionDAO();
+            SpecificationsDAO specDAO = new SpecificationsDAO();
+
+            Product product = dao.getProductById(id);
             List<String> images = pid.getImagesByProductId(id);
-            
+            List<ProductOption> options = pod.getByProductID(id);
+
             request.setAttribute("product", product);
             request.setAttribute("images", images);
-            
+            request.setAttribute("options", options);
+
+            // Neu nguoi dung da chon 1 option
+            if (optionRaw != null) {
+                int optionId = Integer.parseInt(optionRaw);
+                ProductOption selectedOption = pod.getByOptionId(optionId);
+                List<Specifications> specs = specDAO.getByOptionId(optionId);
+
+                request.setAttribute("selectedOption", selectedOption);
+                request.setAttribute("specifications", specs);
+            }
+
             request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch(Exception e){
+        } catch(ServletException | IOException | NumberFormatException e){
             System.out.println(e);
             //response.sendRedirect("home.jsp");
         }
-        
+
     }
 
     /**
