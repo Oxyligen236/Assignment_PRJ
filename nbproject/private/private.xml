@@ -3,7 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/Ky_4/PRJ301/Code_Class/Assignment_PRJ/web/home.jsp</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/model/Type.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/controller/HomeServlet.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/dal/BrandDAO.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/controller/DetailServlet.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/model/CartItem.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/model/Cart.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/model/Product.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/dal/CartDAO.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/dal/ProductDAO.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/model/Brand.java</file>
+            <file>file:/D:/study/Code%20Java/Code-PRJ301/Assignment_PRJ/src/java/model/ProductImage.java</file>
         </group>
     </open-files>
 </project-private>

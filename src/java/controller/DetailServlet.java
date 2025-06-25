@@ -13,7 +13,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import model.Product;
 
@@ -62,8 +61,7 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String idRaw = request.getParameter("pid");
-          
+         String idRaw = request.getParameter("pid");          
         try{
             System.out.println("------------------------");
             int id = Integer.parseInt(idRaw);
@@ -77,7 +75,7 @@ public class DetailServlet extends HttpServlet {
             request.setAttribute("images", images);
             
             request.getRequestDispatcher("detail.jsp").forward(request, response);
-        } catch(Exception e){
+        } catch(ServletException | IOException | NumberFormatException e){
             System.out.println(e);
             //response.sendRedirect("home.jsp");
         }
